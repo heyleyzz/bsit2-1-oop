@@ -1,30 +1,28 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String choice;
+        Student s1 = new Student("Darna Batumbakal", 20, "BSIT", 85.0, 90.0, 88.0);
+        Student s2 = new Student("Superman Duhaylungsod", 19, "BSCS", 92.0, 95.0, 89.0);
+        Student s3 = new Student("Batman Luguron", 21, "BSIT", 65.0, 70.0, 68.0);
 
-        do {
-            System.out.println("Enter Number 1: ");
-            int number1 = input.nextInt();
-            System.out.println("Enter Number 2: ");
-            int number2 = input.nextInt();
-            System.out.println("Enter Number 3: ");
-            int number3 = input.nextInt();
-            System.out.println("Enter Number 4: ");
-            int number4 = input.nextInt();
-            System.out.println("Enter Number 5: ");
-            int number5 = input.nextInt();
+        Student[] students = {s1, s2, s3};
+        int passingCount = 0;
 
-            int totalNumbers = number1 + number2 + number3 + number4 + number5;
-            System.out.println("Total Number: " + totalNumbers);
+        for (Student s : students) {
+            System.out.println("\nStudent Information:");
+            s.displayInfo();
+            double average = s.calculateAverage();
+            System.out.printf("Average: %.2f\n", average);
+            String letterGrade = s.getLetterGrade();
+            System.out.println("Letter Grade: " + letterGrade);
 
-            System.out.print("\nDo you want to try again? (yes/no): ");
-            input.nextLine();
-            choice = input.nextLine();
-        } while (choice.equalsIgnoreCase("yes"));
+            if (s.isPassing()) {
+                System.out.println("Status: PASSING");
+                passingCount++;
+            } else {
+                System.out.println("Status: FAILING");
+            }
+        }
 
-        System.out.println("Program ended.");
+        System.out.println("\nSummary: " + passingCount + " out of " + students.length + " students are passing.");
     }
 }
