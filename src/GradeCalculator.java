@@ -1,4 +1,5 @@
 public class GradeCalculator {
+
     public double calculateAverage(double... grades) {
         if (grades.length == 0) {
             return 0.0;
@@ -10,7 +11,6 @@ public class GradeCalculator {
         }
         return sum / grades.length;
     }
-
 
     public String getLetterGrade(double average) {
         if (average >= 90 && average <= 100) {
@@ -26,33 +26,14 @@ public class GradeCalculator {
         }
     }
 
-
     public void displayResult(String studentName, double average) {
         System.out.println("Student: " + studentName);
         System.out.println("Average: " + average);
     }
 
-
     public void displayResult(String studentName, double average, String letterGrade) {
         System.out.println("Student: " + studentName);
         System.out.println("Average: " + average);
         System.out.println("Letter Grade: " + letterGrade);
-    }
-
-
-    public static void main(String[] args) {
-        GradeCalculator calculator = new GradeCalculator ();
-
-
-        String studentName = "John Smith";
-        double average = calculator.calculateAverage(85.5, 92.0, 78.5, 90.0);
-        String letterGrade = calculator.getLetterGrade(average);
-
-
-        System.out.println("First displayResult");
-        calculator.displayResult(studentName, average);
-
-        System.out.println("\nSecond displayResult");
-        calculator.displayResult(studentName, average, letterGrade);
     }
 }
