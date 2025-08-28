@@ -1,30 +1,38 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String choice;
+    public static void Main(String[] args) {
+        PostManager pm = new PostManager();
 
-        do {
-            System.out.println("Enter Number 1: ");
-            int number1 = input.nextInt();
-            System.out.println("Enter Number 2: ");
-            int number2 = input.nextInt();
-            System.out.println("Enter Number 3: ");
-            int number3 = input.nextInt();
-            System.out.println("Enter Number 4: ");
-            int number4 = input.nextInt();
-            System.out.println("Enter Number 5: ");
-            int number5 = input.nextInt();
+        // Sample post
+        String title = "Java Programming Tips";
+        int engagement = pm.calculateEngagement(150, 75, 25);
+        String category = pm.getCategoryRating(engagement);
 
-            int totalNumbers = number1 + number2 + number3 + number4 + number5;
-            System.out.println("Total Number: " + totalNumbers);
+        // Hashtags
+        String[] hashtags = { "#java", "#coding", "#programming", "#java", "#tips" };
+        ArrayList<String> uniqueHashtags = pm.manageHashtags(hashtags);
 
-            System.out.print("\nDo you want to try again? (yes/no): ");
-            input.nextLine();
-            choice = input.nextLine();
-        } while (choice.equalsIgnoreCase("yes"));
+        // Posts + engagement
+        ArrayList<String> posts = new ArrayList<>(Arrays.asList(
+                "Java Programming Tips", "Advanced Java Tutorial", "Spring Boot Guide"
+        ));
+        HashMap<String, Integer> engagementMap = new HashMap<>();
+        engagementMap.put("Java Programming Tips", engagement);
+        engagementMap.put("Advanced Java Tutorial", 800);
+        engagementMap.put("Spring Boot Guide", 1200);
 
-        System.out.println("Program ended.");
+        LinkedList<String> trending = pm.findTrendingPosts(posts, engagementMap);
+
+        // Authors
+        HashSet<String> authors = pm.getUniqueAuthors("Alice", "Bob", "Alice", "Charlie", "Bob");
+
+        // Final formatted output
+        System.out.println("=== Social Media Post Manager ===");
+        pm.displayPostStats(title, engagement, category);
+        System.out.println();
+        System.out.println("Unique Hashtags: " + uniqueHashtags);
+        System.out.println("Trending Posts: " + trending);
+        System.out.println("Unique Authors: " + authors);
     }
 }
