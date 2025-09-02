@@ -2,29 +2,48 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String choice;
+        LibraryManager manager = new LibraryManager();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        System.out.println("=== Library Management System ===");
 
         do {
-            System.out.println("Enter Number 1: ");
-            int number1 = input.nextInt();
-            System.out.println("Enter Number 2: ");
-            int number2 = input.nextInt();
-            System.out.println("Enter Number 3: ");
-            int number3 = input.nextInt();
-            System.out.println("Enter Number 4: ");
-            int number4 = input.nextInt();
-            System.out.println("Enter Number 5: ");
-            int number5 = input.nextInt();
+            manager.showBooks();
 
-            int totalNumbers = number1 + number2 + number3 + number4 + number5;
-            System.out.println("Total Number: " + totalNumbers);
+            System.out.println("Choose an option:");
+            System.out.println("1. Show Books");
+            System.out.println("2. Add Book");
+            System.out.println("3. Remove Book");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
 
-            System.out.print("\nDo you want to try again? (yes/no): ");
-            input.nextLine();
-            choice = input.nextLine();
-        } while (choice.equalsIgnoreCase("yes"));
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Program ended.");
+                switch (choice) {
+                    case 1:
+                        manager.showBooks();
+                        break;
+                    case 2:
+                        manager.addBook();
+                        break;
+                    case 3:
+                        manager.removeBook();
+                        break;
+                    case 4:
+                        System.out.println("Exiting program...");
+                        break;
+                    default:
+                        System.out.println("Invalid choice! Please enter 1-4.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Please enter a valid number!");
+                choice = 0;
+            }
+
+        } while (choice != 4);
+
+        System.out.println("Program completed successfully.");
     }
 }
