@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Book {
     private String title;
@@ -21,6 +22,7 @@ public class Book {
     }
 
     public void addMultipleRatings(int... ratings) {
+         System.out.println("Ratings Added: " + Arrays.toString(ratings));
         for (int rating : ratings) {
             try {
                 addRating(rating);
