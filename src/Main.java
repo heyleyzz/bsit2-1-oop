@@ -1,30 +1,59 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String choice;
+        System.out.println("Adding books and ratings...");
 
-        do {
-            System.out.println("Enter Number 1: ");
-            int number1 = input.nextInt();
-            System.out.println("Enter Number 2: ");
-            int number2 = input.nextInt();
-            System.out.println("Enter Number 3: ");
-            int number3 = input.nextInt();
-            System.out.println("Enter Number 4: ");
-            int number4 = input.nextInt();
-            System.out.println("Enter Number 5: ");
-            int number5 = input.nextInt();
+        Book book1 = new Book("Java Programming", "John Smith");
+        Book book2 = new Book("Data Structures", "Alice Brown");
+        Book book3 = new Book("Web Development", "Bob Wilson");
 
-            int totalNumbers = number1 + number2 + number3 + number4 + number5;
-            System.out.println("Total Number: " + totalNumbers);
+        try {
+            book1.addRating(4);
+            System.out.println("Rating 4 added successfully");
+            book1.addMultipleRatings(4, 4, 4);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
-            System.out.print("\nDo you want to try again? (yes/no): ");
-            input.nextLine();
-            choice = input.nextLine();
-        } while (choice.equalsIgnoreCase("yes"));
+        try {
+            book2.addRating(5);
+            System.out.println("Rating 5 added successfully");
+            book2.addMultipleRatings(4, 4, 4);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
-        System.out.println("Program ended.");
+        try {
+            book3.addRating(3);
+            System.out.println("Rating 3 added successfully");
+            book3.addMultipleRatings (3, 3, 3, 4);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        try {
+            book2.addRating(6);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+
+        System.out.println("\nBook Results:");
+        System.out.println(book1.displayBook());
+        System.out.println(book2.displayBook());
+        System.out.println(book3.displayBook());
+
+
+        System.out.println("\nTotal books created: " + Book.getTotalBooks());
+
+
+        Book highestRatedBook = book1;
+        for (Book book : new Book[]{book1, book2, book3}) {
+            if (book.getAverageRating() > highestRatedBook.getAverageRating()) {
+                highestRatedBook = book;
+            }
+        }
+
+        System.out.println("Highest rated book: " + highestRatedBook.getTitle() + " by "
+                + highestRatedBook.getAuthor() + " (" + highestRatedBook.getAverageRating() + ")");
     }
 }
